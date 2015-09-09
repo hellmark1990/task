@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8
+
+Options +FollowSymLinks
+Options -Indexes
+
+RewriteEngine on
+
+RewriteCond $1 !^(index\.php|assets/.*|public/.*|uploads/.*|favicon\.ico|favicon\.png|captcha/.*|application/.*/templates|application/.*/assets/js|application/.*/assets/css|application/.*/assets/images|CHANGELOG.xml|templates|js)
+RewriteRule ^(.*)$ /index.php/$1 [L]

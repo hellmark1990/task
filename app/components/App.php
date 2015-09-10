@@ -3,6 +3,12 @@
 namespace app\components;
 
 
+use app\components\DB\DB;
+
+/**
+ * Class App
+ * @package app\components
+ */
 class App {
 
     private static $instance;
@@ -11,6 +17,9 @@ class App {
         ComponentsContainer::create()->register();
     }
 
+    /**
+     * @return App
+     */
     public static function create() {
         self::$instance = self::$instance ? self::$instance : new self();
         return self::$instance;

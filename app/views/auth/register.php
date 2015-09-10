@@ -3,7 +3,7 @@
 <form action="/register" id="registration-form" method="post">
     <div class="form-field">
         <label>Name:</label>
-        <input type="text" name="name">
+        <input type="text" name="username">
     </div>
 
     <div class="form-field">
@@ -18,7 +18,7 @@
 
     <div class="form-field">
         <label>Repeat password:</label>
-        <input type="text" name="repeat-password">
+        <input type="text" name="repeatPassword">
     </div>
 
     <div class="form-field">

@@ -19,11 +19,12 @@ class ComponentsContainer {
         return self::$instance;
     }
 
-    public function setComponent(array $component) {
+    public function setComponent(array $component, array $data = []) {
         $componentId = key($component);
         $componentClass = array_shift($component);
+        $componentObject = is_object($componentClass) ? $componentClass : new $componentClass($data);
 
-        $this->components[$componentId] = new $componentClass();
+        $this->components[$componentId] = $componentObject;
         return $this;
     }
 

@@ -75,6 +75,7 @@ class MySql implements IDrive{
         $whereExpression = $this->prepereWhereExpresion($where);
 
         $query = trim("SELECT $columns FROM `$table` $whereExpression");
+        dd($query);
         $this->pdoObject = $this->connection->prepare($query);
         $this->pdoObject->execute();
 

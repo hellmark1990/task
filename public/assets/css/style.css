@@ -91,6 +91,16 @@ ul#top-menu {
     margin-top: 10px;
 }
 
+.validation-errors {
+    border: 2px solid #E8A2A2;
+    background-color: antiquewhite;
+    padding: 10px;
+}
+
+.validation-errors > .error-message{
+    margin: 10px;
+    font-size: 14px;
+}
 
 
 

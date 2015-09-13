@@ -4,22 +4,60 @@ namespace app\models;
 
 class UsersModel extends Model {
 
+    protected $id;
     protected $username;
     protected $email;
     protected $password;
     protected $repeatPassword;
 
+    private $tableName = 'users';
+
     public function __construct() {
         parent::__construct();
     }
 
-    public function rules() {
+    public function savedFields() {
         return [
-            ['username' => 'min[2]|max[255]|trim'],
-            ['email' => 'min[4]|max[255]|trim|email'],
-            ['password' => 'min[6]|max[255]|trim'],
-            ['repeatPassword' => 'min[6]|max[255]|trim|same_as[password]'],
+            'username',
+            'email',
+            'password',
         ];
+    }
+
+    public function rules($scenario) {
+        $rules = [
+            'register' => [
+                ['username' => 'required|min[2]|max[255]'],
+                ['email' => 'required|min[4]|max[255]|email'],
+                ['password' => 'required|min[6]|max[255]'],
+                ['repeatPassword' => 'required|min[6]|max[255]|sameAs[password]'],
+            ],
+            'login' => [
+                ['email' => 'required|min[4]|max[255]|email'],
+                ['password' => 'required|min[6]|max[255]'],
+            ]
+        ];
+
+        return $scenario ? $rules[$scenario] : $rules;
+    }
+
+    public function labels($label = null) {
+        $labels = [
+            'username' => 'User Name',
+            'email' => 'Email',
+            'password' => 'Password',
+            'repeatPassword' => 'Repeat password',
+        ];
+
+        return $label ? $labels[$label] : $labels;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        return $this->id = $id ? $id : null;
     }
 
     public function setUsername($username) {
@@ -52,5 +90,9 @@ class UsersModel extends Model {
 
     public function getRepeatPassword() {
         return $this->repeatPassword;
+    }
+
+    public function getTableName() {
+        return $this->tableName;
     }
 }

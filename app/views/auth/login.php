@@ -12,12 +12,7 @@
     </div>
 <?php } ?>
 
-<form action="/register" id="registration-form" method="post">
-    <div class="form-field">
-        <label>Name:</label>
-        <input type="text" name="username" <?php if($this->templateData['postData']['username']){?>value="<?= $this->templateData['postData']['username'] ?>"<?php } ?>>
-    </div>
-
+<form action="/login" id="registration-form" method="post">
     <div class="form-field">
         <label>Email:</label>
         <input type="text" name="email" <?php if($this->templateData['postData']['email']){?>value="<?= $this->templateData['postData']['email'] ?>"<?php } ?>>
@@ -25,12 +20,7 @@
 
     <div class="form-field">
         <label>Password:</label>
-        <input type="password" name="password">
-    </div>
-
-    <div class="form-field">
-        <label>Repeat password:</label>
-        <input type="password" name="repeatPassword">
+        <input type="text" name="password">
     </div>
 
     <div class="form-field">

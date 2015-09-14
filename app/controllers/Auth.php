@@ -8,17 +8,28 @@ use app\models\UsersModel;
 class Auth {
 
     public function register() {
+        if (App::create()->session->isLoggedIn()) {
+            header('Location: /profile');
+        }
+
         $postData = App::create()->request->post();
         if ($postData) {
-            $user = new UsersModel();
-            $validation = $user->fromArray($postData)->validate('register');
-            $validationErrors = $validation->getErrors();
+            $userEmail = App::create()->request->post('email');
+            $userInDb = (new UsersModel())->findOne(['email' => "='$userEmail'"]);
 
-            if (!$validationErrors) {
-                $user->setPassword(md5($user->getPassword()));
-                $user->save();
+            if (!$userInDb->getId()) {
+                $user = new UsersModel();
+                $validation = $user->fromArray($postData)->validate('register');
+                $validationErrors = $validation->getErrors();
 
-                header('Location: /login');
+                if (!$validationErrors) {
+                    $user->setPassword(md5($user->getPassword()));
+                    $user->save();
+
+                    header('Location: /login');
+                }
+            } else {
+                $validationErrors[]['email']['message'] = 'User with such email is already exists.';
             }
         }
 
@@ -33,6 +44,10 @@ class Auth {
     }
 
     public function login() {
+        if (App::create()->session->isLoggedIn()) {
+            header('Location: /profile');
+        }
+
         $postData = App::create()->request->post();
         if ($postData) {
             $user = new UsersModel();
@@ -62,6 +77,6 @@ class Auth {
 
     public function logout() {
         App::create()->session->destroySession();
-        header('Location: /register');
+        header('Location: /login');
     }
 }

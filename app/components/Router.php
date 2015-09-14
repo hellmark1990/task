@@ -41,7 +41,7 @@ class Router {
         return self::$ROUTS[$route] ? true : false;
     }
 
-    protected function callRouteActin($route) {
+    protected function callRouteAction($route) {
         $routeData = self::$ROUTS[$route];
 
         $routeClassName = $routeData['class'];
@@ -64,9 +64,19 @@ class Router {
         $route = str_replace('/', '', $route);
 
         if ($this->exists($route)) {
-            $this->callRouteActin($route);
+            $this->callRouteAction($route);
+        } else {
+            $this->error404();
         }
 
+    }
+
+    public function error404() {
+        App::create()->template
+            ->setData([
+                'title' => '404 Not Found',
+            ])
+            ->render('errors/404');
     }
 
 

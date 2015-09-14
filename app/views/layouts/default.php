@@ -1,3 +1,4 @@
+<?php use app\components\App; ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -15,9 +16,12 @@
     </div>
 
     <ul id="top-menu">
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/logout">Logout</a></li>
+        <?php if (!App::create()->session->isLoggedIn()) { ?>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+        <?php } else { ?>
+            <li><a href="/logout">Logout</a></li>
+        <?php } ?>
     </ul>
 </div>
 

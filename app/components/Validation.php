@@ -129,7 +129,8 @@ class Validation {
     protected function email($fieldName) {
         $fieldValue = $this->getFieldValue($fieldName);
         if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $fieldValue)) {
-            $this->setError($fieldName, "Field |fieldLabel| contains not valid email: $fieldValue.");
+            $fieldValue = $fieldValue ? ": $fieldValue" : '';
+            $this->setError($fieldName, "Field |fieldLabel| contains not valid email$fieldValue.");
         }
 
         return TRUE;

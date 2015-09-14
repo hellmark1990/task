@@ -41,6 +41,10 @@ class Session {
         return $_SESSION[$item] ? $_SESSION[$item] : null;
     }
 
+    public function isLoggedIn() {
+        return $this->getItem('userId') ? TRUE : FALSE;
+    }
+
     public function destroySession() {
         unset($_SESSION);
         if (isset($_COOKIE[session_name()])) {

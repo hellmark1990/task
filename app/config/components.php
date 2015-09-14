@@ -13,6 +13,11 @@ ComponentsContainer::create()
             'driver' => 'app\components\DB\Drivers\MySql',
         ])
     ])
+    ->setComponent(['session' => app\components\Session::create(
+        [
+
+        ])
+    ])
     ->setComponent(['request' => 'app\components\Request'])
     ->setComponent(['template' => 'app\components\Template'])
     ->setComponent(['router' => 'app\components\Router']);

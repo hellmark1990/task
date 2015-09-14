@@ -51,9 +51,9 @@ class Model {
         }
     }
 
-    public function findOne($whereData){
-        $findData = App::create()->db->select($this->getTableName(), $whereData)->findOne();
+    public function findOne($whereData) {
+        $item = App::create()->db->select($this->getTableName(), $whereData)->findOne();
+        return $this->fromArray($item);
 
-        dd($findData);
     }
 }

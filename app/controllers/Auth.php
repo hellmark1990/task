@@ -42,17 +42,11 @@ class Auth {
             if (!$validationErrors) {
                 $email = $postData['email'];
                 $password = md5($postData['password']);
-                $userInDB = $user->findOne(['email' => "='$email'", 'AND', 'password' => "='$password'"]);
+                $user = $user->findOne(['email' => "='$email'", 'AND', 'password' => "='$password'"]);
 
-                if ($userInDB) {
-
-                    // TODO: login
-
-                    dd('login part');
-//                $user->setPassword(md5($user->getPassword()));
-//                $user->save();
-//
-//                header('Location: /profile');
+                if ($user) {
+                    App::create()->session->setData(['userId' => $user->getId()]);
+                    header('Location: /profile');
                 }
             }
         }
@@ -67,5 +61,7 @@ class Auth {
     }
 
     public function logout() {
+        App::create()->session->destroySession();
+        header('Location: /register');
     }
 }

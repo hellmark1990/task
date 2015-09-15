@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\components\App;
 use app\models\UsersModel;
 
-class Profile {
+class Profile extends Controller{
 
     public function index() {
         $currentUserId = App::create()->session->getItem('userId');

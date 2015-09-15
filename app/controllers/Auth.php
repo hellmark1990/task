@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\components\App;
 use app\models\UsersModel;
 
-class Auth {
+class Auth extends Controller{
 
     public function register() {
         if (App::create()->session->isLoggedIn()) {
@@ -59,9 +59,11 @@ class Auth {
                 $password = md5($postData['password']);
                 $user = $user->findOne(['email' => "='$email'", 'AND', 'password' => "='$password'"]);
 
-                if ($user) {
+                if ($user->getId()) {
                     App::create()->session->setData(['userId' => $user->getId()]);
                     header('Location: /profile');
+                }else{
+                    $validationErrors[]['user']['message'] =  'Your entered data for login are wrong';
                 }
             }
         }

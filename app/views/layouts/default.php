@@ -12,7 +12,9 @@
 
 <div id="header">
     <div id="logo">
-        <img src="/public/assets/images/logo.png">
+        <a href="/">
+          <img src="/public/assets/images/logo.png">
+        </a>
     </div>
 
     <ul id="top-menu">
@@ -21,6 +23,7 @@
             <li><a href="/login">Login</a></li>
         <?php } else { ?>
             <li><a href="/logout">Logout</a></li>
+            <li><a href="/profile">Profile</a></li>
         <?php } ?>
     </ul>
 </div>

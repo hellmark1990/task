@@ -1,0 +1,1 @@
+<h1 class="title"><?= $this->templateData['title'] ?></h1>
